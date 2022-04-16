@@ -3,6 +3,46 @@
 
 {% block content %}
 
-<h1>Menu Page</h1>
+
+<main>
+    <div>
+        <h1>Add option</h1>
+        <div>
+            <form class="form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% for field in form %}
+
+                <!-- Input:Text -->
+                <div class="form__field">
+                    <label for="formInput#text">{{field.label}}</label>
+                    {{field}}
+                </div>
+
+                {% endfor %}
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+
+
+    <div>
+        <h1>Menu options</h1>
+        {% for option in options %}
+        <tr>
+            <td>
+              <h4>{{option.option_title}}</h4>
+            </td>
+            <td>
+              <a class="tag tag--pill tag--main settings__btn" href="{% url 'update-option' pk=menu.id bi=option.id %}"><i class="im im-edit"></i> Edit</a>
+              <a class="tag tag--pill tag--main settings__btn" href="{% url 'delete-option' pk=menu.id bi=option.id %}?next=/account/{{menu.id}}"><i class="im im-x-mark-circle-o"></i>Delete</a>
+            </td>
+          </tr>
+
+        {% endfor %}
+    </div>
+
+
+</main>
 
 {% endblock %}

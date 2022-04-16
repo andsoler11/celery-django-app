@@ -9,13 +9,14 @@ class Menu(models.Model):
     title = models.CharField(max_length=255)
     menu_day = models.DateField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
-    options = models.ManyToManyField('MenuOption', blank=True)
+    # options = models.ManyToManyField('MenuOption', blank=True)
 
     def __str__(self):
         return str(self.title)
 
 
-class MenuOption(models.Model):
+class Option(models.Model):
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE, null=True, blank=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     option_title = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)

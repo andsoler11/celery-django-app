@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Menu
+from .models import Menu, Option
 
 
 class DateInput(forms.DateInput):
@@ -19,4 +19,14 @@ class MenuForm(ModelForm):
 
         widgets = {
             'menu_day': DateInput(),
+        }
+
+
+class OptionForm(ModelForm):
+    class Meta:
+        model = Option
+        fields = ['option_title']
+
+        labels = {
+            'option_title': 'Option',
         }
