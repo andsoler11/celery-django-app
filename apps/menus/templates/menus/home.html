@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+
+<main>
+    <div>
+        <h1>Create Menu</h1>
+        <div>
+            <form class="form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% for field in form %}
+
+                <!-- Input:Text -->
+                <div class="form__field">
+                    <label for="formInput#text">{{field.label}}</label>
+                    {{field}}
+                </div>
+
+                {% endfor %}
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+
+
+    <div>
+        <h1>Available Menus</h1>
+        {% for menu in menus %}
+        <div>
+            <a href="{% url 'menu' menu.id %}" class="project">{{menu.title}}</a>
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+</main>
+
+
+
+
+
+{% endblock %}
